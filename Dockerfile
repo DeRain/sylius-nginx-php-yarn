@@ -40,8 +40,11 @@ RUN docker-php-ext-install readline
 RUN docker-php-ext-install exif
 RUN docker-php-ext-install gd
 
+RUN pecl install -o -f redis \
+&&  rm -rf /tmp/pear \
+&&  docker-php-ext-enable redis
+
 # Install nodejs and yarn
-RUN apt-get install --yes curl
 RUN curl --silent --location https://deb.nodesource.com/setup_9.x | bash -
 RUN apt-get install -y nodejs
 RUN apt-get install -y build-essential
